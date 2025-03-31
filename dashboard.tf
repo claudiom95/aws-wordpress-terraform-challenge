@@ -34,7 +34,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           view   = "timeSeries",
           region = "eu-west-3",
           metrics = [
-            ["AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", aws_db_instance.wordpress_db.id]
+            ["AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", module.rds.db_instance_id]
           ],
           period = 300,
           stat   = "Average"
@@ -53,7 +53,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           view   = "timeSeries",
           region = "eu-west-3",
           metrics = [
-            ["AWS/RDS", "FreeStorageSpace", "DBInstanceIdentifier", aws_db_instance.wordpress_db.id]
+            ["AWS/RDS", "FreeStorageSpace", "DBInstanceIdentifier", module.rds.db_instance_id]
           ],
           period = 300,
           stat   = "Average"

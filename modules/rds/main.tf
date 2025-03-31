@@ -1,15 +1,15 @@
 resource "aws_db_instance" "wordpress_db" {
   allocated_storage               = 20
   storage_type                    = "gp2"
-  instance_class                  = "db.t3.micro"
+  instance_class                  = var.instance_class
   engine                          = "mysql"
   engine_version                  = "8.0.40"
-  db_name                         = "wordpress_db"
-  username                        = "claudio"
+  db_name                         = var.db_name
+  username                        = var.db_username
   password                        = var.db_password
   identifier                      = "wordpress-db-instance"
   publicly_accessible             = false
-  vpc_security_group_ids          = [module.vpc.private_sg_id]
+  vpc_security_group_ids          = var.vpc_security_group_ids
   db_subnet_group_name            = aws_db_subnet_group.wordpress_db_subnet_group.name
   multi_az                        = false
   enabled_cloudwatch_logs_exports = ["error", "slowquery"]
@@ -18,10 +18,9 @@ resource "aws_db_instance" "wordpress_db" {
 
 resource "aws_db_subnet_group" "wordpress_db_subnet_group" {
   name       = "wordpress-db-subnet-group"
-  subnet_ids = module.vpc.private_subnet_ids
+  subnet_ids = var.subnet_ids
 }
 
-# For MySQL Logs
 resource "aws_db_parameter_group" "mysql_logs" {
   name        = "wordpress-db-logs"
   family      = "mysql8.0"

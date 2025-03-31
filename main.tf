@@ -18,5 +18,15 @@ module "ec2" {
   security_group_ids   = [module.vpc.public_sg_id]
   iam_instance_profile = aws_iam_instance_profile.cloudwatch_profile.name
   db_password          = local.db_password
-  db_host              = aws_db_instance.wordpress_db.endpoint
+  db_host              = module.rds.endpoint
+}
+
+module "rds" {
+  source                 = "./modules/rds"
+  instance_class         = "db.t3.micro"
+  db_name                = "wordpress_db"
+  db_username            = "claudio"
+  db_password            = local.db_password
+  vpc_security_group_ids = [module.vpc.private_sg_id]
+  subnet_ids             = module.vpc.private_subnet_ids
 }
