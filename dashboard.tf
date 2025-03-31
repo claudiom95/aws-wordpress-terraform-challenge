@@ -15,7 +15,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           view   = "timeSeries",
           region = "eu-west-3",
           metrics = [
-            ["AWS/EC2", "CPUUtilization", "InstanceId", aws_instance.wordpress.id]
+            ["AWS/EC2", "CPUUtilization", "InstanceId", module.ec2.instance_id]
           ],
           period = 300,
           stat   = "Average"
@@ -72,7 +72,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           view   = "timeSeries",
           region = "eu-west-3",
           metrics = [
-            ["AWS/EC2", "NetworkIn", "InstanceId", aws_instance.wordpress.id]
+            ["AWS/EC2", "NetworkIn", "InstanceId", module.ec2.instance_id]
           ],
           period = 300,
           stat   = "Sum"

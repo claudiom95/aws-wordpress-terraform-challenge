@@ -53,6 +53,20 @@ variable "availability_zone_2" {
   default     = "eu-west-3b"
 }
 
+# EC2 Variables
+
+variable "ami_id" {
+  description = "AMI ID to launch the WordPress instance"
+  type        = string
+  default     = "ami-0ff71843f814379b3"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type for WordPress"
+  type        = string
+  default     = "t2.micro"
+}
+
 # MySQL
 variable "db_password" {
   description = "The password for the WordPress MySQL database"
