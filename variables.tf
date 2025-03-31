@@ -67,7 +67,25 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-# MySQL
+# RDS Variables
+variable "instance_class" {
+  type        = string
+  description = "The RDS instance class"
+  default     = "db.t3.micro"
+}
+
+variable "db_name" {
+  type        = string
+  description = "The name of the WordPress database"
+  default     = "wordpress_db"
+}
+
+variable "db_username" {
+  type        = string
+  description = "The username for the WordPress database"
+  default     = "claudio"
+}
+
 variable "db_password" {
   description = "The password for the WordPress MySQL database"
   type        = string

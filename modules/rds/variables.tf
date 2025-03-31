@@ -1,6 +1,6 @@
 variable "instance_class" {
   type        = string
-  description = "The RDS instance class (e.g., db.t3.micro)"
+  description = "The RDS instance class"
 }
 
 variable "db_name" {
