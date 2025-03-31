@@ -5,6 +5,12 @@ variable "region" {
 }
 
 # VPC variables
+variable "vpc_name" {
+  description = "Name of the VPC (used in tags)"
+  type        = string
+  default     = "wordpress-vpc"
+}
+
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
@@ -27,6 +33,24 @@ variable "private_subnet_cidr_2" {
   description = "CIDR block for the second private subnet"
   type        = string
   default     = "10.0.3.0/24"
+}
+
+variable "enable_dns_hostnames" {
+  description = "Enable DNS hostnames for the VPC"
+  type        = bool
+  default     = true
+}
+
+variable "availability_zone_1" {
+  description = "Availability zone for the first private subnet"
+  type        = string
+  default     = "eu-west-3a"
+}
+
+variable "availability_zone_2" {
+  description = "Availability zone for the second private subnet"
+  type        = string
+  default     = "eu-west-3b"
 }
 
 # MySQL

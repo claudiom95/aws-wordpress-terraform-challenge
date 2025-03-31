@@ -9,7 +9,7 @@ resource "aws_db_instance" "wordpress_db" {
   password                        = var.db_password
   identifier                      = "wordpress-db-instance"
   publicly_accessible             = false
-  vpc_security_group_ids          = [aws_security_group.private_sg.id]
+  vpc_security_group_ids          = [module.vpc.private_sg_id]
   db_subnet_group_name            = aws_db_subnet_group.wordpress_db_subnet_group.name
   multi_az                        = false
   enabled_cloudwatch_logs_exports = ["error", "slowquery"]
@@ -18,7 +18,7 @@ resource "aws_db_instance" "wordpress_db" {
 
 resource "aws_db_subnet_group" "wordpress_db_subnet_group" {
   name       = "wordpress-db-subnet-group"
-  subnet_ids = [aws_subnet.private_subnet.id, aws_subnet.private_subnet_2.id]
+  subnet_ids = module.vpc.private_subnet_ids
 }
 
 # For MySQL Logs
