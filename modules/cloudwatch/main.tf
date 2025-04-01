@@ -14,10 +14,18 @@ resource "aws_iam_role" "cloudwatch_agent_role" {
   })
 }
 
-# Attach a Prebuilt Policy
-resource "aws_iam_role_policy_attachment" "cloudwatch_attach" {
-  role       = aws_iam_role.cloudwatch_agent_role.name
-  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+# Make Custom Policy with Least Privilege
+resource "aws_iam_policy" "cloudwatch_least_privilege" {
+  name        = "CloudWatchAgentLeastPrivilege"
+  description = "Minimal IAM permissions for EC2 CloudWatch Agent"
+  policy      = file("${path.module}/cloudwatch-policy.json")
+}
+
+# Attach Custom Policy
+resource "aws_iam_policy_attachment" "cloudwatch_custom_attach" {
+  name       = "cloudwatch-agent-custom-attachment"
+  roles      = [aws_iam_role.cloudwatch_agent_role.name]
+  policy_arn = aws_iam_policy.cloudwatch_least_privilege.arn
 }
 
 # Make Role Usable by EC2
