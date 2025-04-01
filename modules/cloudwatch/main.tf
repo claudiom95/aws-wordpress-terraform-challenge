@@ -1,3 +1,32 @@
+# Define a Role EC2 Can Assume
+resource "aws_iam_role" "cloudwatch_agent_role" {
+  name = "ec2-cloudwatch-agent-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Action = "sts:AssumeRole",
+      Effect = "Allow",
+      Principal = {
+        Service = "ec2.amazonaws.com"
+      }
+    }]
+  })
+}
+
+# Attach a Prebuilt Policy
+resource "aws_iam_role_policy_attachment" "cloudwatch_attach" {
+  role       = aws_iam_role.cloudwatch_agent_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
+
+# Make Role Usable by EC2
+resource "aws_iam_instance_profile" "cloudwatch_profile" {
+  name = "ec2-cloudwatch-agent-profile"
+  role = aws_iam_role.cloudwatch_agent_role.name
+}
+
+# Dashboard
 resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
   dashboard_name = "wordpress-dashboard"
 
@@ -15,7 +44,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           view   = "timeSeries",
           region = "eu-west-3",
           metrics = [
-            ["AWS/EC2", "CPUUtilization", "InstanceId", module.ec2.instance_id]
+            ["AWS/EC2", "CPUUtilization", "InstanceId", var.ec2_instance_id]
           ],
           period = 300,
           stat   = "Average"
@@ -34,7 +63,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           view   = "timeSeries",
           region = "eu-west-3",
           metrics = [
-            ["AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", module.rds.db_instance_id]
+            ["AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", var.rds_instance_id]
           ],
           period = 300,
           stat   = "Average"
@@ -53,7 +82,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           view   = "timeSeries",
           region = "eu-west-3",
           metrics = [
-            ["AWS/RDS", "FreeStorageSpace", "DBInstanceIdentifier", module.rds.db_instance_id]
+            ["AWS/RDS", "FreeStorageSpace", "DBInstanceIdentifier", var.rds_instance_id]
           ],
           period = 300,
           stat   = "Average"
@@ -72,7 +101,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           view   = "timeSeries",
           region = "eu-west-3",
           metrics = [
-            ["AWS/EC2", "NetworkIn", "InstanceId", module.ec2.instance_id]
+            ["AWS/EC2", "NetworkIn", "InstanceId", var.ec2_instance_id]
           ],
           period = 300,
           stat   = "Sum"

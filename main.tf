@@ -16,7 +16,7 @@ module "ec2" {
   instance_type        = var.instance_type
   subnet_id            = module.vpc.public_subnet_id
   security_group_ids   = [module.vpc.public_sg_id]
-  iam_instance_profile = aws_iam_instance_profile.cloudwatch_profile.name
+  iam_instance_profile = module.cloudwatch.iam_instance_profile_name
   db_password          = local.db_password
   db_host              = module.rds.endpoint
   db_name              = var.db_name
@@ -31,4 +31,10 @@ module "rds" {
   db_password            = local.db_password
   vpc_security_group_ids = [module.vpc.private_sg_id]
   subnet_ids             = module.vpc.private_subnet_ids
+}
+
+module "cloudwatch" {
+  source          = "./modules/cloudwatch"
+  ec2_instance_id = module.ec2.instance_id
+  rds_instance_id = module.rds.db_instance_id
 }
