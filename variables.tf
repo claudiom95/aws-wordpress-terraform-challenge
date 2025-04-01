@@ -5,12 +5,6 @@ variable "region" {
 }
 
 # VPC variables
-variable "vpc_name" {
-  description = "Name of the VPC (used in tags)"
-  type        = string
-  default     = "wordpress-vpc"
-}
-
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string
