@@ -20,7 +20,3 @@ data "aws_secretsmanager_secret_version" "db_password" {
     aws_secretsmanager_secret_version.wordpress_db_password_version
   ]
 }
-
-locals {
-  db_password = jsondecode(data.aws_secretsmanager_secret_version.db_password.secret_string).password
-}

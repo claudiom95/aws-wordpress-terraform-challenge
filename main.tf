@@ -38,3 +38,12 @@ module "cloudwatch" {
   ec2_instance_id = module.ec2.instance_id
   rds_instance_id = module.rds.db_instance_id
 }
+
+module "secrets" {
+  source      = "./modules/secrets"
+  db_password = var.db_password
+}
+
+locals {
+  db_password = module.secrets.db_password
+}
