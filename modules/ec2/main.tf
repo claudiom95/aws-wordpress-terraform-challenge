@@ -9,5 +9,7 @@ resource "aws_instance" "wordpress" {
   user_data = templatefile("${path.module}/user_data.sh", {
     db_password = var.db_password
     db_host     = var.db_host
+    db_name               = var.db_name
+    db_username           = var.db_username
   })
 }

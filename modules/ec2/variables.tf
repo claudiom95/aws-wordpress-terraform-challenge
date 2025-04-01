@@ -34,3 +34,13 @@ variable "db_host" {
   description = "MySQL DB host"
   type        = string
 }
+
+variable "db_name" {
+  type        = string
+  description = "The name of the WordPress database"
+}
+
+variable "db_username" {
+  type        = string
+  description = "The username for the WordPress database"
+}

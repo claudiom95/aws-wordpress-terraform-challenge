@@ -19,6 +19,8 @@ module "ec2" {
   iam_instance_profile = aws_iam_instance_profile.cloudwatch_profile.name
   db_password          = local.db_password
   db_host              = module.rds.endpoint
+  db_name              = var.db_name
+  db_username          = var.db_username
 }
 
 module "rds" {

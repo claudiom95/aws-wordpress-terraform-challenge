@@ -56,8 +56,8 @@ services:
       - "80:80"
     environment:
       WORDPRESS_DB_HOST: "${db_host}"
-      WORDPRESS_DB_NAME: "wordpress_db"
-      WORDPRESS_DB_USER: "claudio"
+      WORDPRESS_DB_NAME: "${db_name}"
+      WORDPRESS_DB_USER: "${db_username}"
       WORDPRESS_DB_PASSWORD: "${db_password}"
 EOF
 
