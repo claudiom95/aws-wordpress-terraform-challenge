@@ -5,7 +5,7 @@ variable "ami_id" {
 
 variable "instance_type" {
   description = "Instance type for WordPress EC2"
-  type = string
+  type        = string
   default     = "t2.micro"
 }
 

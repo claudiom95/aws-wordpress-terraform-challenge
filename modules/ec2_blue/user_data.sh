@@ -2,6 +2,13 @@
 exec > /var/log/user-data.log 2>&1
 set -xe
 
+# Wait for apt locks to be released (max 60s)
+for i in {1..30}; do
+  fuser /var/lib/dpkg/lock >/dev/null 2>&1 || break
+  echo "Waiting for apt lock..."
+  sleep 2
+done
+
 # Install Docker and dependencies
 apt-get update -y
 apt-get install -y docker.io curl jq unzip
@@ -11,6 +18,7 @@ wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-
 dpkg -i amazon-cloudwatch-agent.deb
 
 # Create CloudWatch config
+mkdir -p /opt/aws/amazon-cloudwatch-agent/etc
 cat <<EOF > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 {
   "logs": {

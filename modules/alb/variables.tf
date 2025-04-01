@@ -17,7 +17,7 @@ variable "alb_name" {
 variable "security_group_ids" {
   description = "Security group ID to attach to the ALB"
   type        = list(string)
-  
+
 }
 
 variable "ec2_blue_instance_id" {
