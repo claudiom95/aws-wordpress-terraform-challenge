@@ -50,7 +50,7 @@ cat <<EOF > /home/ubuntu/docker-compose.yml
 services:
   wordpress:
     image: wordpress:latest
-    container_name: wordpress_app
+    container_name: wordpress_app_blue
     restart: always
     ports:
       - "80:80"

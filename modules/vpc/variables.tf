@@ -5,7 +5,12 @@ variable "vpc_cidr" {
 
 variable "public_subnet_cidr" {
   type        = string
-  description = "CIDR block for the public subnet (WordPress EC2 instance)"
+  description = "CIDR block for the first public subnet (WordPress EC2 instance)"
+}
+
+variable "public_subnet_cidr_2" {
+  type        = string
+  description = "CIDR block for the second public subnet (WordPress EC2 instance)"
 }
 
 variable "private_subnet_cidr" {

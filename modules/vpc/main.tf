@@ -3,10 +3,18 @@ resource "aws_vpc" "wordpress_vpc" {
   cidr_block = var.vpc_cidr
 }
 
-# Public Subnet
+# Public Subnets
 resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.wordpress_vpc.id
   cidr_block              = var.public_subnet_cidr
+  availability_zone       = "eu-west-3a"
+  map_public_ip_on_launch = true
+}
+
+resource "aws_subnet" "public_subnet_2" {
+  vpc_id                  = aws_vpc.wordpress_vpc.id
+  cidr_block              = var.public_subnet_cidr_2
+  availability_zone       = "eu-west-3b"
   map_public_ip_on_launch = true
 }
 
