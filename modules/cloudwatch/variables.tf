@@ -3,7 +3,7 @@ variable "ec2_instance_ids" {
   type        = list(string)
 }
 
-variable "rds_instance_id" {
-  type        = string
-  description = "RDS instance ID for dashboard"
+variable "rds_instance_ids" {
+  type        = list(string)
+  description = "List of RDS instance IDs for dashboard"
 }

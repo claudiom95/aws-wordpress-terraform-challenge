@@ -8,10 +8,10 @@ module "ec2_blue" {
   associate_public_ip_address = true
 
   user_data = templatefile("${path.root}/user_data.sh", {
-    db_host     = module.rds.endpoint,
+    db_host     = module.rds_blue.endpoint,
     db_name     = var.db_name,
     db_username = var.db_username,
-    db_password = var.db_password,
+    db_password = var.db_password_blue,
     instance    = "blue"
   })
 }
@@ -26,10 +26,10 @@ module "ec2_green" {
   associate_public_ip_address = true
 
   user_data = templatefile("${path.root}/user_data.sh", {
-    db_host     = module.rds.endpoint,
+    db_host     = module.rds_green.endpoint,
     db_name     = var.db_name,
     db_username = var.db_username,
-    db_password = var.db_password,
+    db_password = var.db_password_green,
     instance    = "green"
   })
 }

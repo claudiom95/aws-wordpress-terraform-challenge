@@ -7,22 +7,23 @@ resource "aws_db_instance" "wordpress_db" {
   db_name                         = var.db_name
   username                        = var.db_username
   password                        = var.db_password
-  identifier                      = "wordpress-db-instance"
+  identifier                      = var.identifier
   publicly_accessible             = false
   vpc_security_group_ids          = var.vpc_security_group_ids
   db_subnet_group_name            = aws_db_subnet_group.wordpress_db_subnet_group.name
   multi_az                        = false
   enabled_cloudwatch_logs_exports = ["error", "slowquery"]
   parameter_group_name            = aws_db_parameter_group.mysql_logs.name
+  skip_final_snapshot             = true
 }
 
 resource "aws_db_subnet_group" "wordpress_db_subnet_group" {
-  name       = "wordpress-db-subnet-group"
+  name       = "wordpress-db-subnet-group-${var.name_suffix}"
   subnet_ids = var.subnet_ids
 }
 
 resource "aws_db_parameter_group" "mysql_logs" {
-  name        = "wordpress-db-logs"
+  name        = "wordpress-db-logs-${var.name_suffix}"
   family      = "mysql8.0"
   description = "Enable MySQL logs for CloudWatch"
 

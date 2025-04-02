@@ -28,3 +28,13 @@ variable "subnet_ids" {
   type        = list(string)
   description = "List of private subnet IDs to use for the RDS subnet group"
 }
+
+variable "identifier" {
+  description = "RDS instance identifier"
+  type        = string
+}
+
+variable "name_suffix" {
+  description = "Unique suffix to differentiate blue and green DB resources"
+  type        = string
+}

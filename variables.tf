@@ -85,17 +85,17 @@ variable "db_username" {
   default     = "claudio"
 }
 
-variable "db_password" {
+variable "db_password_blue" {
   description = "The password for the blue WordPress MySQL database"
   type        = string
   sensitive   = true
 }
 
-# variable "db_password_green" {
-#   description = "DB password for the green RDS instance"
-#   type        = string
-#   sensitive   = true
-# }
+variable "db_password_green" {
+  description = "DB password for the green RDS instance"
+  type        = string
+  sensitive   = true
+}
 
 # ALB Variables
 variable "active_environment" {

@@ -42,6 +42,14 @@ locals {
       "AWS/EC2", "CPUUtilization", "InstanceId", id
     ]
   ]
+
+  rds_cpu_metrics = [
+    for id in var.rds_instance_ids : ["AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", id]
+  ]
+
+  rds_free_storage_metrics = [
+    for id in var.rds_instance_ids : ["AWS/RDS", "FreeStorageSpace", "DBInstanceIdentifier", id]
+  ]
 }
 
 resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
@@ -74,14 +82,12 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
         width  = 6,
         height = 6,
         properties = {
-          title  = "RDS CPU Utilization",
-          view   = "timeSeries",
-          region = "eu-west-3",
-          metrics = [
-            ["AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", var.rds_instance_id]
-          ],
-          period = 300,
-          stat   = "Average"
+          title   = "RDS CPU Utilization",
+          view    = "timeSeries",
+          region  = "eu-west-3",
+          metrics = local.rds_cpu_metrics,
+          period  = 300,
+          stat    = "Average"
         }
       },
 
@@ -93,14 +99,12 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
         width  = 6,
         height = 6,
         properties = {
-          title  = "RDS Free Storage (MB)",
-          view   = "timeSeries",
-          region = "eu-west-3",
-          metrics = [
-            ["AWS/RDS", "FreeStorageSpace", "DBInstanceIdentifier", var.rds_instance_id]
-          ],
-          period = 300,
-          stat   = "Average"
+          title   = "RDS Free Storage (MB)",
+          view    = "timeSeries",
+          region  = "eu-west-3",
+          metrics = local.rds_free_storage_metrics,
+          period  = 300,
+          stat    = "Average"
         }
       },
 

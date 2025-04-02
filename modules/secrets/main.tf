@@ -1,6 +1,6 @@
 # Creates an empty secret in SM
 resource "aws_secretsmanager_secret" "wordpress_db_password" {
-  name        = "wordpress-db-password"
+  name        = var.secret_name
   description = "MySQL database password for WordPress"
 }
 

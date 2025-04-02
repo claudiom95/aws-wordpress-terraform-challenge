@@ -3,3 +3,8 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "secret_name" {
+  type        = string
+  description = "The name of the Secrets Manager secret"
+}
