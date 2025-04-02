@@ -27,7 +27,7 @@ resource "aws_lb_listener" "http" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.blue.arn
+    target_group_arn = local.active_target_group_arn
   }
 }
 
@@ -41,4 +41,8 @@ resource "aws_lb_target_group_attachment" "green_instance" {
   target_group_arn = aws_lb_target_group.green.arn
   target_id        = var.ec2_green_instance_id
   port             = 80
+}
+
+locals {
+  active_target_group_arn = var.active_environment == "blue" ? aws_lb_target_group.blue.arn : aws_lb_target_group.green.arn
 }

@@ -29,3 +29,9 @@ variable "ec2_green_instance_id" {
   description = "ID of the green EC2 instance"
   type        = string
 }
+
+variable "active_environment" {
+  description = "Which environment (blue or green) should receive traffic"
+  type        = string
+  default     = "blue"
+}

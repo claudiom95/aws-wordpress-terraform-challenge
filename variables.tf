@@ -54,7 +54,6 @@ variable "availability_zone_2" {
 }
 
 # EC2 Variables
-
 variable "ami_id" {
   description = "AMI ID to launch the WordPress instance"
   type        = string
@@ -96,4 +95,11 @@ variable "db_password_green" {
   description = "DB password for the green RDS instance"
   type        = string
   sensitive   = true
+}
+
+# ALB Variables
+variable "active_environment" {
+  description = "The environment to route traffic to (blue or green)"
+  type        = string
+  default     = "blue"
 }

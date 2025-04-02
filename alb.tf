@@ -5,4 +5,5 @@ module "alb" {
   security_group_ids    = [module.vpc.public_sg_id]
   ec2_blue_instance_id  = module.ec2_blue.instance_id
   ec2_green_instance_id = module.ec2_green.instance_id
+  active_environment    = var.active_environment
 }
