@@ -57,12 +57,12 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
         width  = 6,
         height = 6,
         properties = {
-          title  = "EC2 CPU Usage (%)",
-          view   = "timeSeries",
-          region = "eu-west-3",
+          title   = "EC2 CPU Usage (%)",
+          view    = "timeSeries",
+          region  = "eu-west-3",
           metrics = local.ec2_cpu_metrics,
-          period = 300,
-          stat   = "Average"
+          period  = 300,
+          stat    = "Average"
         }
       },
 
@@ -112,12 +112,12 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
         width  = 6,
         height = 6,
         properties = {
-          title  = "EC2 Network In",
-          view   = "timeSeries",
-          region = "eu-west-3",
+          title   = "EC2 Network In",
+          view    = "timeSeries",
+          region  = "eu-west-3",
           metrics = local.ec2_cpu_metrics,
-          period = 300,
-          stat   = "Sum"
+          period  = 300,
+          stat    = "Sum"
         }
       },
     ]
