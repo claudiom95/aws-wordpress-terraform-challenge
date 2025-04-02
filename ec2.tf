@@ -7,11 +7,13 @@ module "ec2_blue" {
   iam_instance_profile        = module.cloudwatch.iam_instance_profile_name
   associate_public_ip_address = true
 
-  db_host       = module.rds.endpoint
-  db_name       = var.db_name
-  db_username   = var.db_username
-  db_password   = var.db_password
-  instance_name = "blue"
+  user_data = templatefile("${path.root}/user_data.sh", {
+    db_host     = module.rds.endpoint,
+    db_name     = var.db_name,
+    db_username = var.db_username,
+    db_password = var.db_password,
+    instance    = "blue"
+  })
 }
 
 module "ec2_green" {
@@ -23,9 +25,11 @@ module "ec2_green" {
   iam_instance_profile        = module.cloudwatch.iam_instance_profile_name
   associate_public_ip_address = true
 
-  db_host       = module.rds.endpoint
-  db_name       = var.db_name
-  db_username   = var.db_username
-  db_password   = var.db_password
-  instance_name = "green"
+  user_data = templatefile("${path.root}/user_data.sh", {
+    db_host     = module.rds.endpoint,
+    db_name     = var.db_name,
+    db_username = var.db_username,
+    db_password = var.db_password,
+    instance    = "green"
+  })
 }

@@ -23,34 +23,13 @@ variable "iam_instance_profile" {
   type        = string
 }
 
-variable "db_host" {
-  description = "RDS database endpoint"
-  type        = string
-}
-
-variable "db_name" {
-  description = "WordPress database name"
-  type        = string
-}
-
-variable "db_username" {
-  description = "Database username"
-  type        = string
-}
-
-variable "db_password" {
-  description = "Database password"
-  type        = string
-  sensitive   = true
-}
-
-variable "instance_name" {
-  description = "Logical name of the instance (used for user_data)"
-  type        = string
-}
-
 variable "associate_public_ip_address" {
   description = "Whether to associate a public IP with the instance"
   type        = bool
   default     = false
+}
+
+variable "user_data" {
+  description = "User data script to provision EC2 instance"
+  type        = string
 }

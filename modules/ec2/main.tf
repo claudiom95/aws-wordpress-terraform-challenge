@@ -5,12 +5,5 @@ resource "aws_instance" "wordpress" {
   vpc_security_group_ids      = var.security_group_id
   associate_public_ip_address = var.associate_public_ip_address
   iam_instance_profile        = var.iam_instance_profile
-
-  user_data = templatefile("${path.module}/user_data.sh", {
-    db_host     = var.db_host,
-    db_name     = var.db_name,
-    db_username = var.db_username,
-    db_password = var.db_password,
-    instance    = var.instance_name
-  })
+  user_data                   = var.user_data
 }
