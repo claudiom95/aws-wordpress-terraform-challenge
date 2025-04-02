@@ -91,11 +91,11 @@ variable "db_password" {
   sensitive   = true
 }
 
-variable "db_password_green" {
-  description = "DB password for the green RDS instance"
-  type        = string
-  sensitive   = true
-}
+# variable "db_password_green" {
+#   description = "DB password for the green RDS instance"
+#   type        = string
+#   sensitive   = true
+# }
 
 # ALB Variables
 variable "active_environment" {
