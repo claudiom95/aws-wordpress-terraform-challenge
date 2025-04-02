@@ -35,6 +35,15 @@ resource "aws_iam_instance_profile" "cloudwatch_profile" {
 }
 
 # Dashboard
+
+locals {
+  ec2_cpu_metrics = [
+    for id in var.ec2_instance_ids : [
+      "AWS/EC2", "CPUUtilization", "InstanceId", id
+    ]
+  ]
+}
+
 resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
   dashboard_name = "wordpress-dashboard"
 
@@ -51,9 +60,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           title  = "EC2 CPU Usage (%)",
           view   = "timeSeries",
           region = "eu-west-3",
-          metrics = [
-            ["AWS/EC2", "CPUUtilization", "InstanceId", var.ec2_instance_id]
-          ],
+          metrics = local.ec2_cpu_metrics,
           period = 300,
           stat   = "Average"
         }
@@ -108,9 +115,7 @@ resource "aws_cloudwatch_dashboard" "wordpress_dashboard" {
           title  = "EC2 Network In",
           view   = "timeSeries",
           region = "eu-west-3",
-          metrics = [
-            ["AWS/EC2", "NetworkIn", "InstanceId", var.ec2_instance_id]
-          ],
+          metrics = local.ec2_cpu_metrics,
           period = 300,
           stat   = "Sum"
         }

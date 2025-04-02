@@ -28,7 +28,7 @@ cat <<EOF > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
           {
             "file_path": "/var/log/user-data.log",
             "log_group_name": "/wordpress/user-data",
-            "log_stream_name": "{instance_id}"
+            "log_stream_name": "${instance}"
           }
         ]
       }
@@ -58,7 +58,7 @@ cat <<EOF > /home/ubuntu/docker-compose.yml
 services:
   wordpress:
     image: wordpress:latest
-    container_name: wordpress_app_blue
+    container_name: wordpress_app_${instance}
     restart: always
     ports:
       - "80:80"

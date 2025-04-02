@@ -87,7 +87,13 @@ variable "db_username" {
 }
 
 variable "db_password" {
-  description = "The password for the WordPress MySQL database"
+  description = "The password for the blue WordPress MySQL database"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_password_green" {
+  description = "DB password for the green RDS instance"
   type        = string
   sensitive   = true
 }
