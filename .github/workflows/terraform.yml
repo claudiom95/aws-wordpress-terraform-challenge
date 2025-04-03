@@ -61,6 +61,4 @@ jobs:
            go-version: '1.21'
       
       - name: Run Terratest
-        run: go test -v ./tests/
-        env:
-          TERRATEST_TERRAFORM_BINARY: terraform
+        run: TERRATEST_TERRAFORM_BINARY=terraform go test -v ./tests/
