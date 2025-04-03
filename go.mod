@@ -3,7 +3,7 @@ module github.com/claudio/challenge/tests
 go 1.22.2
 
 require (
-	github.com/gruntwork-io/terratest v0.48.2
+	github.com/gruntwork-io/terratest v0.45.0
 	github.com/stretchr/testify v1.10.0
 )
 
