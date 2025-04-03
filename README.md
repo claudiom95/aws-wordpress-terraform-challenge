@@ -1,6 +1,6 @@
 # WordPress on AWS with Terraform
 
-This project deploys a WordPress application on AWS using Terraform for Infrastructure as Code (IaC), along with monitoring and automated deployment via GitHub Actions.
+Terraform project to deploy a fully monitored, Blue-Green WordPress application on AWS, with automated CI/CD and secure secret management.
 
 ---
 
