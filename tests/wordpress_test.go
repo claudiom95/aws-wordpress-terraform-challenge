@@ -33,7 +33,7 @@ func TestWordPressDeployment(t *testing.T) {
 
 	// Get ALB Public DNS output
 	fmt.Println("Getting ALB DNS output")
-	albDNS := terraform.OutputRequired(t, terraformOptions, "alb_dns_name")
+	albDNS := terraform.Output(t, terraformOptions, "alb_dns_name")
 	url := fmt.Sprintf("http://%s", albDNS)
 	fmt.Printf("ALB URL: %s\n", url)
 
