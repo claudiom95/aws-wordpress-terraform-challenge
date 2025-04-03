@@ -2,6 +2,7 @@ package test
 
 import (
 	"fmt"
+	"os"
     "os/exec"
     "strings"
     "testing"
