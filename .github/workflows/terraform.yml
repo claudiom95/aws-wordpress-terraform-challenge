@@ -62,3 +62,5 @@ jobs:
       
       - name: Run Terratest
         run: go test -v ./tests/
+        env:
+          TERRATEST_TERRAFORM_BINARY: terraform
