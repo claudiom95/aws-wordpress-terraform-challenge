@@ -6,4 +6,8 @@ resource "aws_instance" "wordpress" {
   associate_public_ip_address = var.associate_public_ip_address
   iam_instance_profile        = var.iam_instance_profile
   user_data                   = var.user_data
+
+  lifecycle {
+    ignore_changes = [associate_public_ip_address]
+  }
 }
